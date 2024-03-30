@@ -1,7 +1,6 @@
 title Everything Must Grow
 color_palette 3
-realtime_interval 0.15
-key_repeat_interval 1.5
+key_repeat_interval 0.2
 
 ========
 OBJECTS
@@ -12,7 +11,12 @@ darkgreen
 
 
 Wall
-brown
+darkgray gray
+00000
+00000
+00000
+00000
+00000
 
 Player G
 lightbrown blue lightgray brown
@@ -517,7 +521,7 @@ Flower = Flower0 or Flower1 or Flower2
 Unsatisfied = Seed or Sprout or Flower0 or Flower1
 
 Pushable = Seed or WateringCan
-Obstacle = Wall
+Obstacle = Wall or Pot or Flower or Sprout
 MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
 FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
 
@@ -547,7 +551,15 @@ Wall, Player, Seed, Flower, Sprout, WateringCan, FallenPlayer
 RULES
 ======
 [ > Player | Pushable ] -> [ > Player | > Pushable ]
+
+( A flying seed can land in the pot )
+left [Seed MoveLeft | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
+right [Seed MoveRight | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
+up [Seed MoveUp | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
+down [Seed MoveDown | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
+
 late [ Seed Pot ] -> [ Sprout0 ]
+
 [ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ]
 
 (Tripping)
@@ -600,11 +612,13 @@ no Unsatisfied
 LEVELS
 =======
 
-#########
-#...S.PW#
-#..T...W#
-#.G.S.PW#
-#...C..W#
-#......W#
-#########
-
+#############
+##g#p....T..#
+##.#p..T....#
+##.##.####..#
+##.......#.##
+##.s.s.c.#.##
+#..#######.##
+#..........##
+#########..##
+#############
