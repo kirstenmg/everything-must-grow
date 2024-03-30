@@ -156,7 +156,10 @@ up [ Pushable MoveUp | NO Obstacle ] -> [> Pushable > MoveUp | NO Obstacle] agai
 down [ Pushable MoveDown | NO Obstacle ] -> [> Pushable > MoveDown | NO Obstacle] again
 
 (Hitting an obstacle stops its movement and rights the player)
-[ Pushable MoveDirection | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+left [ Pushable MoveLeft | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+right [ Pushable MoveRight | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+up [ Pushable MoveUp | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+down [ Pushable MoveDown | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
 
 
 ==============
@@ -171,11 +174,7 @@ LEVELS
 
 #########
 #.......#
-#.......#
-#.......#
-#...T...#
-#.......#
-#.G.S.P.#
+#GST..P.#
 #.......#
 #.......#
 #########
