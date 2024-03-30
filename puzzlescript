@@ -38,6 +38,54 @@ lightbrown black
 SeedCollider
 transparent
 
+Mushroom M
+darkbrown brown lightbrown
+.....
+..0..
+.010.
+..2..
+.....
+
+Daisy1
+orange yellow 
+.....
+..0..
+.010.
+..0..
+.....
+
+Daisy2
+blue yellow
+.....
+..0..
+.010.
+..0..
+.....
+
+Daisy3
+red yellow
+.....
+..0..
+.010.
+..0..
+.....
+
+Daisy4
+purple yellow
+.....
+..0..
+.010.
+..0..
+.....
+
+Daisy5
+lightred yellow
+.....
+..0..
+.010.
+..0..
+.....
+
 
 Pot P
 brown
@@ -566,12 +614,20 @@ A = StreamVert0 and LogA
 3 = StreamVert0 and BridgeRU
 S = Seed and SeedCollider
 
+
+! = Daisy1
+@ = Daisy2
+$ = Daisy3
+% = Daisy4
+& = Daisy5
+
 WateringCan = WateringCan0 or WateringCan1 or WateringCan2 or WateringCan3
 Sprout = Sprout0 or Sprout1
 Flower = Flower0 or Flower1 or Flower2
 Unsatisfied = Seed or Sprout or Flower0 or Flower1
+Daisy = Daisy1 or Daisy2 or Daisy3 or Daisy4 or Daisy5
 
-Pushable = SeedCollider or WateringCan
+Pushable = SeedCollider or WateringCan or Mushroom or Daisy
 Obstacle = Wall or Pot or Flower or Sprout
 MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
 FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
@@ -600,7 +656,7 @@ Pot, Root, Stream
 Seed
 LogA, Bridge
 MoveDirection
-Wall, Player, SeedCollider, Flower, Sprout, WateringCan, FallenPlayer
+Wall, Player, SeedCollider, Flower, Sprout, WateringCan, FallenPlayer, Mushroom, Daisy
 
 ======
 RULES
@@ -706,6 +762,22 @@ no Unsatisfied
 LEVELS
 =======
 
+###################
+#....1.m..........#
+#...mlhhh\cm.m###.#
+##..mmmmmw..#.###.#
+##.#####!wm.#.###.#
+##.#####@w..#.###.#
+##......$w........#
+##.#s.##%w......#.#
+##.#..##&lhhhh\.#.#
+##.#.###!@$!@&w.#.#
+##.m.#.##.&@$!a.#.#
+####.mm....@%!w.#.#
+##..m.....m.g@wp..#
+###################
+
+
 #############
 #...www.....#
 #...12w.....#
@@ -729,5 +801,3 @@ LEVELS
 #..........##
 #########..##
 #############
-
-
