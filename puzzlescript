@@ -1,7 +1,8 @@
-title My Game
-author My Name Here
-homepage www.puzzlescript.net
+title Everything Must Grow
 color_palette 3
+realtime_interval 0.15
+key_repeat_interval 1.5
+
 ========
 OBJECTS
 ========
@@ -29,29 +30,425 @@ lightbrown
 .0...
 0..00
 
-Sprout R
-green brown
-.0.0.
-..0..
-.101.
-.111.
-..1..
-
 Pot P
 brown
 .....
 .....
-.0.0.
+.....
+.....
 .000.
-..0..
 
-Flower F
-blue green brown pink #FFFF00
-00300
-03430
-00300
-00100
-02220
+Sprout0
+green brown
+.....
+.....
+.....
+..0..
+.111.
+
+Sprout1
+green brown
+.....
+.....
+.0.0.
+..0..
+.111.
+
+Flower0
+blue green brown pink yellow
+.....
+..3..
+..1..
+..1..
+.222.
+
+Flower1
+blue green brown pink yellow
+..3..
+.31..
+..1..
+..1..
+.222.
+
+Flower2
+blue green brown pink yellow
+..3..
+.343.
+..3..
+..1..
+.222.
+
+( tripping )
+
+WateringCan0 C
+gray
+.0...
+0.0.0
+0.00.
+000..
+000..
+
+WateringCan1
+gray blue
+.0...
+0.0.0
+0.001
+000..
+000..
+
+WateringCan2
+gray blue
+.0...
+0.0.0
+0.00.
+000.1
+000..
+
+WateringCan3
+gray blue
+.0...
+0.0.0
+0.00.
+000..
+000.1
+
+StreamVert0 W
+brown blue lightblue
+01210
+01110
+01110
+01110
+01110
+
+StreamVert1
+brown blue lightblue
+01210
+01110
+01110
+01110
+01110
+
+StreamVert2
+brown blue lightblue
+01110
+01210
+01110
+01110
+01110
+
+StreamVert3
+brown blue lightblue
+01110
+01110
+01210
+01110
+01110
+
+StreamVert4
+brown blue lightblue
+01110
+01110
+01110
+01210
+01110
+
+StreamVert5
+brown blue lightblue
+01110
+01110
+01110
+01110
+01210
+
+StreamRight0
+brown blue lightblue
+00000
+11111
+21111
+11111
+00000
+
+StreamRight1
+brown blue lightblue
+00000
+11111
+21111
+11111
+00000
+
+StreamRight2
+brown blue lightblue
+00000
+11111
+12111
+11111
+00000
+
+StreamRight3
+brown blue lightblue
+00000
+11111
+11211
+11111
+00000
+
+StreamRight4
+brown blue lightblue
+00000
+11111
+11121
+11111
+00000
+
+StreamRight5
+brown blue lightblue
+00000
+11111
+11112
+11111
+00000
+
+StreamLeft5
+brown blue lightblue
+00000
+11111
+21111
+11111
+00000
+
+StreamLeft4
+brown blue lightblue
+00000
+11111
+12111
+11111
+00000
+
+StreamLeft3
+brown blue lightblue
+00000
+11111
+11211
+11111
+00000
+
+StreamLeft2
+brown blue lightblue
+00000
+11111
+11121
+11111
+00000
+
+StreamLeft1
+brown blue lightblue
+00000
+11111
+11112
+11111
+00000
+
+StreamLeft0
+brown blue lightblue
+00000
+11111
+11112
+11111
+00000
+
+StreamLL0
+brown blue lightblue
+01210
+01111
+01111
+01111
+00000
+
+
+StreamLL1
+brown blue lightblue
+01210
+01111
+01111
+01111
+00000
+
+StreamLL2
+brown blue lightblue
+01110
+01211
+01111
+01111
+00000
+
+StreamLL3
+brown blue lightblue
+01110
+01111
+01211
+01111
+00000
+
+StreamLL4
+brown blue lightblue
+01110
+01111
+01121
+01111
+00000
+
+StreamLL5
+brown blue lightblue
+01110
+01111
+01112
+01111
+00000
+
+StreamUL0
+brown blue lightblue
+00000
+01111
+01112
+01111
+01110
+
+StreamUL1
+brown blue lightblue
+00000
+01111
+01112
+01111
+01110
+
+StreamUL2
+brown blue lightblue
+00000
+01111
+01121
+01111
+01110
+
+StreamUL3
+brown blue lightblue
+00000
+01111
+01211
+01111
+01110
+
+StreamUL4
+brown blue lightblue
+00000
+01111
+01111
+01211
+01110
+
+StreamUL5
+brown blue lightblue
+00000
+01111
+01111
+01111
+01210
+
+StreamUR0
+brown blue lightblue
+00000
+11110
+21110
+11110
+01110
+
+StreamUR1
+brown blue lightblue
+00000
+11110
+21110
+11110
+01110
+
+StreamUR2
+brown blue lightblue
+00000
+11110
+12110
+11110
+01110
+
+StreamUR3
+brown blue lightblue
+00000
+11110
+11210
+11110
+01110
+
+StreamUR4
+brown blue lightblue
+00000
+11110
+11110
+11210
+01110
+
+StreamUR5
+brown blue lightblue
+00000
+11110
+11110
+11110
+01210
+
+StreamLR0
+brown blue lightblue
+01210
+11110
+11110
+11110
+00000
+
+StreamLR1
+brown blue lightblue
+01210
+11110
+11110
+11110
+00000
+
+StreamLR2
+brown blue lightblue
+01110
+11210
+11110
+11110
+00000
+
+StreamLR3
+brown blue lightblue
+01110
+11110
+11210
+11110
+00000
+
+StreamLR4
+brown blue lightblue
+01110
+11110
+12110
+11110
+00000
+
+StreamLR5
+brown blue lightblue
+01110
+11110
+21110
+11110
+00000
+
 
 ( tripping )
 LeftFallenPlayer
@@ -107,16 +504,31 @@ transparent
 MoveDown
 transparent
 
+
 =======
 LEGEND
 =======
 
 . = Background
 # = Wall
-Pushable = Seed
+WateringCan = WateringCan0 or WateringCan1 or WateringCan2 or WateringCan3
+Sprout = Sprout0 or Sprout1
+Flower = Flower0 or Flower1 or Flower2
+Unsatisfied = Seed or Sprout or Flower0 or Flower1
+
+Pushable = Seed or WateringCan
 Obstacle = Wall
 MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
 FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
+
+StreamVert = StreamVert0 or StreamVert1 or StreamVert2 or StreamVert3 or StreamVert4 or StreamVert5
+StreamRight = StreamRight0 or StreamRight1 or StreamRight2 or StreamRight3 or StreamRight4 or StreamRight5
+StreamLeft = StreamLeft0 or StreamLeft1 or StreamLeft2 or StreamLeft3 or StreamLeft4 or StreamLeft5
+StreamLL = StreamLL0 or StreamLL1 or StreamLL2 or StreamLL3 or StreamLL4 or StreamLL5
+StreamLR = StreamLR0 or StreamLR1 or StreamLR2 or StreamLR3 or StreamLR4 or StreamLR5
+StreamUL = StreamUL0 or StreamUL1 or StreamUL2 or StreamUL3 or StreamUL4 or StreamUL5
+StreamUR = StreamUR0 or StreamUR1 or StreamUR2 or StreamUR3 or StreamUR4 or StreamUR5
+Stream = StreamVert or StreamRight or StreamLeft or StreamLL or StreamLR or StreamUL or StreamUR
 
 =======
 SOUNDS
@@ -127,17 +539,16 @@ COLLISIONLAYERS
 ================
 
 Background
-Pot, Root
+Pot, Stream, Root
 MoveDirection
-Wall, Player, Seed, Flower, Sprout, FallenPlayer
+Wall, Player, Seed, Flower, Sprout, WateringCan, FallenPlayer
 
 ======
 RULES
 ======
-
 [ > Player | Pushable ] -> [ > Player | > Pushable ]
-late [ Seed Pot ] -> [ Sprout ]
-
+late [ Seed Pot ] -> [ Sprout0 ]
+[ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ]
 
 (Tripping)
 (If a player moves onto a root, whatever they're pushing starts moving)
@@ -156,27 +567,43 @@ up [ Pushable MoveUp | NO Obstacle ] -> [> Pushable > MoveUp | NO Obstacle] agai
 down [ Pushable MoveDown | NO Obstacle ] -> [> Pushable > MoveDown | NO Obstacle] again
 
 (Hitting an obstacle stops its movement and rights the player)
-[ Pushable MoveDirection | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+left [ Pushable MoveLeft | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+right [ Pushable MoveRight | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+up [ Pushable MoveUp | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+down [ Pushable MoveDown | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
 
+
+( Animations )
+[ WateringCan3 ] -> [ WateringCan0 ]
+[ WateringCan2 ] -> [ WateringCan3 ]
+[ WateringCan1 ] -> [ WateringCan2 ]
+
+[ Flower1 ] -> [ Flower2 ]
+[ Flower0 ] -> [ Flower1 ]
+
+[ Sprout0 ] -> [ Sprout1 ]
+
+[StreamVert5] -> [StreamVert0]
+[StreamVert4] -> [StreamVert5]
+[StreamVert3] -> [StreamVert4]
+[StreamVert2] -> [StreamVert3]
+[StreamVert1] -> [StreamVert2]
+[StreamVert0] -> [StreamVert1]
 
 ==============
 WINCONDITIONS
 ==============
 
-all Seed on Pot
+no Unsatisfied
 
 =======
 LEVELS
 =======
 
 #########
-#.......#
-#.......#
-#.......#
-#...T...#
-#.......#
-#.G.S.P.#
-#.......#
-#.......#
+#...S.PW#
+#..T...W#
+#.G.S.PW#
+#...C..W#
+#......W#
 #########
-
