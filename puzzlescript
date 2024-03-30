@@ -1,0 +1,182 @@
+title My Game
+author My Name Here
+homepage www.puzzlescript.net
+color_palette 3
+========
+OBJECTS
+========
+
+Background
+darkgreen
+
+
+Wall
+brown
+
+Player G
+lightbrown blue lightgray brown
+33333
+.000.
+01210
+.111.
+.3.3.
+
+Seed S
+lightbrown
+0..0.
+0...0
+.....
+.0...
+0..00
+
+Sprout R
+green brown
+.0.0.
+..0..
+.101.
+.111.
+..1..
+
+Pot P
+brown
+.....
+.....
+.0.0.
+.000.
+..0..
+
+Flower F
+blue green brown pink #FFFF00
+00300
+03430
+00300
+00100
+02220
+
+( tripping )
+LeftFallenPlayer
+lightbrown blue lightgray brown
+3.0..
+30113
+3021.
+30113
+3.0..
+
+RightFallenPlayer
+lightbrown blue lightgray brown
+..0.3
+31103
+.1203
+31103
+..0.3
+
+UpFallenPlayer
+lightbrown blue lightgray brown
+.....
+.....
+.111.
+03130
+.111.
+
+DownFallenPlayer
+brown darkbrown lightbrown
+.....
+.....
+.000.
+20102
+.000.
+
+Root T
+darkbrown
+...00
+..0..
+.00..
+00...
+0....
+
+( compels a pushable above it to move left until hitting obstacle )
+MoveLeft
+transparent
+
+MoveRight
+transparent
+
+MoveUp
+transparent
+
+MoveDown
+transparent
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+Pushable = Seed
+Obstacle = Wall
+MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
+FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Pot, Root
+MoveDirection
+Wall, Player, Seed, Flower, Sprout, FallenPlayer
+
+======
+RULES
+======
+
+[ > Player | Pushable ] -> [ > Player | > Pushable ]
+late [ Seed Pot ] -> [ Sprout ]
+
+
+(Tripping)
+(If a player moves onto a root, whatever they're pushing starts moving)
+left [ > Player | Root ] [ > Player | >  Pushable ] -> [> LeftFallenPlayer | Root] [> LeftFallenPlayer | > Pushable > MoveLeft ]
+
+right [ > Player | Root ] [ > Player | >  Pushable ] -> [> RightFallenPlayer | Root] [> RightFallenPlayer | > Pushable > MoveRight ]
+
+up [ > Player | Root ] [ > Player | >  Pushable ] -> [> UpFallenPlayer | Root] [> UpFallenPlayer | > Pushable > MoveUp ]
+
+down [ > Player | Root ] [ > Player | >  Pushable ] -> [> DownFallenPlayer | Root] [> DownFallenPlayer | > Pushable > MoveDown ]
+
+(An object that is moving keeps moving until it hits an obstacle)
+left [ Pushable MoveLeft | NO Obstacle ] -> [> Pushable > MoveLeft | NO Obstacle] again
+right [ Pushable MoveRight | NO Obstacle ] -> [> Pushable > MoveRight | NO Obstacle] again
+up [ Pushable MoveUp | NO Obstacle ] -> [> Pushable > MoveUp | NO Obstacle] again
+down [ Pushable MoveDown | NO Obstacle ] -> [> Pushable > MoveDown | NO Obstacle] again
+
+(Hitting an obstacle stops its movement and rights the player)
+[ Pushable MoveDirection | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+
+
+==============
+WINCONDITIONS
+==============
+
+all Seed on Pot
+
+=======
+LEVELS
+=======
+
+#########
+#.......#
+#.......#
+#.......#
+#...T...#
+#.......#
+#.G.S.P.#
+#.......#
+#.......#
+#########
+
