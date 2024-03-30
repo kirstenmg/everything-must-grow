@@ -135,6 +135,86 @@ blue green brown pink yellow
 ..1..
 .222.
 
+Acorn
+lightbrown brown
+.....
+.111.
+.000.
+..0..
+.....
+
+Sapling0
+green brown
+.....
+.....
+..0..
+..0..
+.111.
+
+Sapling1
+green brown lightbrown
+.....
+..2..
+..2..
+..2..
+.111.
+
+Sapling2
+lightgreen brown lightbrown
+.0.0.
+.02..
+..20.
+..2..
+.111.
+
+TreeTop0
+lightgreen green brown lightbrown
+.....
+.....
+.....
+.30..
+..3..
+
+TreeBottom0
+lightgreen green brown lightbrown
+.030.
+.03..
+..30.
+..2..
+.2222
+
+TreeTop1
+lightgreen green brown lightbrown
+.....
+..0..
+.20..
+.202.
+.02..
+
+TreeBottom1
+lightgreen green brown lightbrown #6B3610
+..21.
+.022.
+..2..
+..4..
+22422
+
+TreeTop2
+lightgreen green brown lightbrown
+.....
+010..
+.201.
+12120
+.121.
+
+TreeBottom2
+lightgreen green brown lightbrown #6B3610
+.12.1
+..42.
+1.4..
+.24..
+24422
+
 ( tripping )
 
 WateringCan0 C
@@ -613,7 +693,7 @@ A = StreamVert0 and LogA
 2 = StreamVert0 and BridgeLD
 3 = StreamVert0 and BridgeRU
 S = Seed and SeedCollider
-
+O = Acorn
 
 ! = Daisy1
 @ = Daisy2
@@ -624,10 +704,12 @@ $ = Daisy3
 WateringCan = WateringCan0 or WateringCan1 or WateringCan2 or WateringCan3
 Sprout = Sprout0 or Sprout1
 Flower = Flower0 or Flower1 or Flower2
-Unsatisfied = Seed or Sprout or Flower0 or Flower1
+Sapling = Sapling0 or Sapling1 or Sapling2
+Tree = TreeTop0 or TreeBottom0 or TreeTop1 or TreeBottom1 or TreeTop2 or TreeBottom2
+Unsatisfied = Seed or Sprout or Flower0 or Flower1 or Acorn or Sapling
 Daisy = Daisy1 or Daisy2 or Daisy3 or Daisy4 or Daisy5
 
-Pushable = SeedCollider or WateringCan or Mushroom or Daisy
+Pushable = SeedCollider or Acorn or WateringCan or Mushroom or Daisy
 Obstacle = Wall or Pot or Flower or Sprout
 MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
 FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
@@ -656,7 +738,7 @@ Pot, Root, Stream
 Seed
 LogA, Bridge
 MoveDirection
-Wall, Player, SeedCollider, Flower, Sprout, WateringCan, FallenPlayer, Mushroom, Daisy
+Wall, Player, FallenPlayer, SeedCollider, Flower, Sprout, Acorn, Sapling, Tree, WateringCan, Mushroom, Daisy
 
 ======
 RULES
@@ -667,6 +749,7 @@ RULES
 
 [ > Player | Pushable ] -> [ > Player | > Pushable ]
 
+( Seed/Acorn -> Sprout/Sapling )
 ( A flying seed can land in the pot )
 left  [ SeedCollider MoveLeft  | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
 right [ SeedCollider MoveRight | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
@@ -675,6 +758,17 @@ down  [ SeedCollider MoveDown  | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Playe
 
 late [ SeedCollider Pot ] -> [ Sprout0 ]
 [ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ]
+
+left  [ Acorn MoveLeft  | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
+right [ Acorn MoveRight | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
+up    [ Acorn MoveUp    | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
+down  [ Acorn MoveDown  | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
+
+late [ Acorn Pot ] -> [ Sapling0 ]
+up [ TreeBottom0 | no Player no TreeTop0 no WateringCan ] -> [ TreeBottom0 | TreeTop0 ]
+up [ TreeBottom1 | TreeTop1 ] -> [ TreeBottom2 | TreeTop2 ]
+up [ TreeBottom0 | TreeTop0 ] -> [ TreeBottom1 | TreeTop1 ]
+[ action Player | WateringCan0 | Sapling2 ] -> [ Player | WateringCan1 | TreeBottom0 ]
 
 ( Tripping )
 ( If a player moves onto a root, whatever they're pushing starts moving )
@@ -723,6 +817,9 @@ late [ SeedCollider ] -> [ SeedCollider Seed ]
 [ Flower0 ] -> [ Flower1 ]
 
 [ Sprout0 ] -> [ Sprout1 ]
+
+[ Sapling1 ] -> [ Sapling2 ]
+[ Sapling0 ] -> [ Sapling1 ]
 
 [ StreamVert5 ] -> [ StreamVert0 ]
 [ StreamVert4 ] -> [ StreamVert5 ]
@@ -806,12 +903,12 @@ LEVELS
 #...www.....#
 #...12w.....#
 #...w31...p.#
-#.T.wwlh\...#
+#.t.wwlh\...#
 #...wlh\w...#
 #.g.lh\ww...#
 #.s...aww...#
 #..c..waw...#
-#.....wwa...#
+#.o...wwa...#
 #.....www...#
 #############
 
@@ -825,3 +922,5 @@ LEVELS
 #..........##
 #########..##
 #############
+
+
