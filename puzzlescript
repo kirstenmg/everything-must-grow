@@ -1,5 +1,6 @@
 title Everything Must Grow
 color_palette 3
+realtime_interval 0.15
 key_repeat_interval 0.2
 
 ========
@@ -26,13 +27,17 @@ lightbrown blue lightgray brown
 .111.
 .3.3.
 
-Seed S
-lightbrown
+Seed
+lightbrown black
 0..0.
-0...0
-.....
+1...0
 .0...
+.0..1
 0..00
+
+SeedCollider
+transparent
+
 
 Pot P
 brown
@@ -164,7 +169,7 @@ brown blue lightblue
 01110
 01210
 
-StreamRight0
+StreamRight0 H
 brown blue lightblue
 00000
 11111
@@ -260,7 +265,7 @@ brown blue lightblue
 11111
 00000
 
-StreamLL0
+StreamLL0 L
 brown blue lightblue
 01210
 01111
@@ -309,7 +314,7 @@ brown blue lightblue
 01111
 00000
 
-StreamUL0
+StreamUL0 /
 brown blue lightblue
 00000
 01111
@@ -357,7 +362,7 @@ brown blue lightblue
 01111
 01210
 
-StreamUR0
+StreamUR0 \
 brown blue lightblue
 00000
 11110
@@ -405,7 +410,7 @@ brown blue lightblue
 11110
 01210
 
-StreamLR0
+StreamLR0 J
 brown blue lightblue
 01210
 11110
@@ -495,6 +500,46 @@ darkbrown
 00...
 0....
 
+LogA
+darkbrown
+00...
+.00..
+..00.
+...00
+.....
+
+BridgeHorizontal
+brown lightbrown
+.....
+.....
+11111
+00000
+11111
+
+BridgeVertical
+brown lightbrown
+.101.
+.101.
+.101.
+.101.
+.101.
+
+BridgeLD
+brown lightbrown
+.....
+.....
+1111.
+0001.
+1101.
+
+BridgeRU
+brown lightbrown
+.101.
+.101.
+.1011
+.1000
+.1111
+
 ( compels a pushable above it to move left until hitting obstacle )
 MoveLeft
 transparent
@@ -515,12 +560,18 @@ LEGEND
 
 . = Background
 # = Wall
+A = StreamVert0 and LogA
+1 = StreamVert0 and BridgeHorizontal
+2 = StreamVert0 and BridgeLD
+3 = StreamVert0 and BridgeRU
+S = Seed and SeedCollider
+
 WateringCan = WateringCan0 or WateringCan1 or WateringCan2 or WateringCan3
 Sprout = Sprout0 or Sprout1
 Flower = Flower0 or Flower1 or Flower2
 Unsatisfied = Seed or Sprout or Flower0 or Flower1
 
-Pushable = Seed or WateringCan
+Pushable = SeedCollider or WateringCan
 Obstacle = Wall or Pot or Flower or Sprout
 MoveDirection = MoveLeft or MoveRight or MoveUp or MoveDown
 FallenPlayer = LeftFallenPlayer or RightFallenPlayer or UpFallenPlayer or DownFallenPlayer
@@ -534,6 +585,8 @@ StreamUL = StreamUL0 or StreamUL1 or StreamUL2 or StreamUL3 or StreamUL4 or Stre
 StreamUR = StreamUR0 or StreamUR1 or StreamUR2 or StreamUR3 or StreamUR4 or StreamUR5
 Stream = StreamVert or StreamRight or StreamLeft or StreamLL or StreamLR or StreamUL or StreamUR
 
+Bridge = BridgeHorizontal or BridgeVertical or BridgeLD or BridgeRU
+
 =======
 SOUNDS
 =======
@@ -543,49 +596,69 @@ COLLISIONLAYERS
 ================
 
 Background
-Pot, Stream, Root
+Pot, Root, Stream
+Seed
+LogA, Bridge
 MoveDirection
-Wall, Player, Seed, Flower, Sprout, WateringCan, FallenPlayer
+Wall, Player, SeedCollider, Flower, Sprout, WateringCan, FallenPlayer
 
 ======
 RULES
 ======
+( Remove Seeds, which will be placed at the end of the frame on SeedColliders )
+[ Seed ] -> [ ]
+
+
 [ > Player | Pushable ] -> [ > Player | > Pushable ]
 
 ( A flying seed can land in the pot )
-left [Seed MoveLeft | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
-right [Seed MoveRight | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
-up [Seed MoveUp | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
-down [Seed MoveDown | Pot ] [FallenPlayer] -> [ | Sprout0 ] [Player]
+left  [ SeedCollider MoveLeft  | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
+right [ SeedCollider MoveRight | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
+up    [ SeedCollider MoveUp    | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
+down  [ SeedCollider MoveDown  | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
 
-late [ Seed Pot ] -> [ Sprout0 ]
-
+late [ SeedCollider Pot ] -> [ Sprout0 ]
 [ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ]
 
-(Tripping)
-(If a player moves onto a root, whatever they're pushing starts moving)
-left [ > Player | Root ] [ > Player | >  Pushable ] -> [> LeftFallenPlayer | Root] [> LeftFallenPlayer | > Pushable > MoveLeft ]
+( Tripping )
+( If a player moves onto a root, whatever they're pushing starts moving )
+left [ > Player | Root ] [ > Player | >  Pushable ] -> [ > LeftFallenPlayer | Root ] [ > LeftFallenPlayer | > Pushable > MoveLeft ]
 
-right [ > Player | Root ] [ > Player | >  Pushable ] -> [> RightFallenPlayer | Root] [> RightFallenPlayer | > Pushable > MoveRight ]
+right [ > Player | Root ] [ > Player | >  Pushable ] -> [ > RightFallenPlayer | Root ] [ > RightFallenPlayer | > Pushable > MoveRight ]
 
-up [ > Player | Root ] [ > Player | >  Pushable ] -> [> UpFallenPlayer | Root] [> UpFallenPlayer | > Pushable > MoveUp ]
+up [ > Player | Root ] [ > Player | >  Pushable ] -> [ > UpFallenPlayer | Root ] [ > UpFallenPlayer | > Pushable > MoveUp ]
 
-down [ > Player | Root ] [ > Player | >  Pushable ] -> [> DownFallenPlayer | Root] [> DownFallenPlayer | > Pushable > MoveDown ]
+down [ > Player | Root ] [ > Player | >  Pushable ] -> [ > DownFallenPlayer | Root] [ > DownFallenPlayer | > Pushable > MoveDown ]
 
-(An object that is moving keeps moving until it hits an obstacle)
-left [ Pushable MoveLeft | NO Obstacle ] -> [> Pushable > MoveLeft | NO Obstacle] again
-right [ Pushable MoveRight | NO Obstacle ] -> [> Pushable > MoveRight | NO Obstacle] again
-up [ Pushable MoveUp | NO Obstacle ] -> [> Pushable > MoveUp | NO Obstacle] again
-down [ Pushable MoveDown | NO Obstacle ] -> [> Pushable > MoveDown | NO Obstacle] again
+( An object that is moving keeps moving until it hits an obstacle )
+left  [ Pushable MoveLeft  | NO Obstacle ] -> [ > Pushable > MoveLeft  | NO Obstacle ] again
+right [ Pushable MoveRight | NO Obstacle ] -> [ > Pushable > MoveRight | NO Obstacle ] again
+up    [ Pushable MoveUp    | NO Obstacle ] -> [ > Pushable > MoveUp    | NO Obstacle ] again
+down  [ Pushable MoveDown  | NO Obstacle ] -> [ > Pushable > MoveDown  | NO Obstacle ] again
 
-(Hitting an obstacle stops its movement and rights the player)
-left [ Pushable MoveLeft | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
-right [ Pushable MoveRight | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
-up [ Pushable MoveUp | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
-down [ Pushable MoveDown | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [Player] again
+( Hitting an obstacle stops its movement and rights the player )
+left  [ Pushable MoveLeft  | Obstacle ] [ FallenPlayer ] -> [ Pushable | Obstacle ] [ Player ]
+right [ Pushable MoveRight | Obstacle ] [ FallenPlayer ] -> [ Pushable | Obstacle ] [ Player ] 
+up    [ Pushable MoveUp    | Obstacle ] [ FallenPlayer ] -> [ Pushable | Obstacle ] [ Player ] 
+down  [ Pushable MoveDown  | Obstacle ] [ FallenPlayer ] -> [ Pushable | Obstacle ] [ Player ]
+( Hitting a stream rights the player )
+[ Pushable MoveDirection Stream ] [ FallenPlayer ] -> [ Pushable Stream ] [ Player ]
 
+( Stream )
+( Prevent the player from moving across the stream )
+[ > Player | Stream no Bridge ] -> [ Player | Stream ]
 
-( Animations )
+( Move pushables down the stream )
+down  [ Pushable StreamVert ]  -> [ > Pushable StreamVert ]
+down  [ Pushable StreamUR ]    -> [ > Pushable StreamUR ]
+right [ Pushable StreamRight ] -> [ > Pushable StreamRight ]
+right [ Pushable StreamLL ]    -> [ > Pushable StreamLL ]
+right [ Pushable LogA ]        -> [ > Pushable LogA ]
+
+( Restore visual Seed )
+late [ SeedCollider ] -> [ SeedCollider Seed ]
+
+( Animation loops )
 [ WateringCan3 ] -> [ WateringCan0 ]
 [ WateringCan2 ] -> [ WateringCan3 ]
 [ WateringCan1 ] -> [ WateringCan2 ]
@@ -595,12 +668,33 @@ down [ Pushable MoveDown | Obstacle ] [FallenPlayer] -> [ Pushable | Obstacle] [
 
 [ Sprout0 ] -> [ Sprout1 ]
 
-[StreamVert5] -> [StreamVert0]
-[StreamVert4] -> [StreamVert5]
-[StreamVert3] -> [StreamVert4]
-[StreamVert2] -> [StreamVert3]
-[StreamVert1] -> [StreamVert2]
-[StreamVert0] -> [StreamVert1]
+[ StreamVert5 ] -> [ StreamVert0 ]
+[ StreamVert4 ] -> [ StreamVert5 ]
+[ StreamVert3 ] -> [ StreamVert4 ]
+[ StreamVert2 ] -> [ StreamVert3 ]
+[ StreamVert1 ] -> [ StreamVert2 ]
+[ StreamVert0 ] -> [ StreamVert1 ]
+
+[ StreamRight5 ] -> [ StreamRight0 ]
+[ StreamRight4 ] -> [ StreamRight5 ]
+[ StreamRight3 ] -> [ StreamRight4 ]
+[ StreamRight2 ] -> [ StreamRight3 ]
+[ StreamRight1 ] -> [ StreamRight2 ]
+[ StreamRight0 ] -> [ StreamRight1 ]
+
+[ StreamLL5 ] -> [ StreamLL0 ]
+[ StreamLL4 ] -> [ StreamLL5 ]
+[ StreamLL3 ] -> [ StreamLL4 ]
+[ StreamLL2 ] -> [ StreamLL3 ]
+[ StreamLL1 ] -> [ StreamLL2 ]
+[ StreamLL0 ] -> [ StreamLL1 ]
+
+[ StreamUR5 ] -> [ StreamUR0 ]
+[ StreamUR4 ] -> [ StreamUR5 ]
+[ StreamUR3 ] -> [ StreamUR4 ]
+[ StreamUR2 ] -> [ StreamUR3 ]
+[ StreamUR1 ] -> [ StreamUR2 ]
+[ StreamUR0 ] -> [ StreamUR1 ]
 
 ==============
 WINCONDITIONS
@@ -613,6 +707,19 @@ LEVELS
 =======
 
 #############
+#...www.....#
+#...12w.....#
+#...w31...p.#
+#.T.wwlh\...#
+#...wlh\w...#
+#.g.lh\ww...#
+#.s...aww...#
+#..c..waw...#
+#.....wwa...#
+#.....www...#
+#############
+
+#############
 ##g#p....T..#
 ##.#p..T....#
 ##.##.####..#
@@ -622,3 +729,5 @@ LEVELS
 #..........##
 #########..##
 #############
+
+
