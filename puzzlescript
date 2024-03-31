@@ -735,6 +735,7 @@ Bridge = BridgeHorizontal or BridgeVertical or BridgeLD or BridgeRU
 SOUNDS
 =======
 
+
 ================
 COLLISIONLAYERS
 ================
@@ -867,12 +868,20 @@ no Unsatisfied
 LEVELS
 =======
 
+MESSAGE * birds chirping *
+MESSAGE What a beautiful day! Perfect weather for some planting in my garden.
+MESSAGE I just have to push these seeds into the holes I've dug, and water them to give them a good start.
+MESSAGE Gameplay: push the seeds to the hole. Move the watering can to your planted sprout, and press X to use the watering can.
+
 ( Planting tutorial level )
 #########
 #.......#
 #.g.spc.#
 #.......#
 #########
+
+MESSAGE That wasn't too difficult! Lots of plants to go.
+MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over them. It's probably fine!
 
 
 ( Log tutorial level )
@@ -899,7 +908,7 @@ LEVELS
 #.st#....#.p.#
 #............#
 ##############
-
+  
 
 ( Relatively straightforward river level )
 ###################
@@ -938,4 +947,6 @@ LEVELS
 #.g..op..#
 #........#
 ##########
+
+MESSAGE Everything is planted! What a fulfilling day!
 
