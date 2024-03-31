@@ -873,14 +873,42 @@ MESSAGE What a beautiful day! Perfect weather for some planting in my garden.
 MESSAGE I just have to push these seeds into the holes I've dug, and water them to give them a good start.
 MESSAGE Gameplay: push the seeds to the hole. Move the watering can to your planted sprout, and press X to use the watering can.
 
+
 ( Planting tutorial level )
-#########
-#.......#
-#.g.spc.#
-#.......#
-#########
+###########
+#.........#
+#.g.s.p.c.#
+#.........#
+###########
 
 MESSAGE That wasn't too difficult! Lots of plants to go.
+
+( Medium planting level)
+
+
+###########
+#......pp.#
+#.gs......#
+#.....$#..#
+#...@...#.#
+#..s....c.#
+#.........#
+###########
+
+
+( Hard planting level )
+##############
+#............#
+#..s.....%.p.#
+#....##.@$...#
+#........m...#
+#.gs.......p.#
+#............#
+#....#c..#...#
+#..s.....#.p.#
+#............#
+##############
+
 MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over them. It's probably fine!
 
 
@@ -895,19 +923,27 @@ MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over 
 ##############
 
 
-( Sneaky log level )
-( Need watering can )
-##############
-#.....@&.....#
-#.st...!m..p.#
-#...##..@$...#
-#....#...m...#
-#gs....#...p.#
-#............#
-#..##...##...#
-#.st#....#.p.#
-#............#
-##############
+( Momentum tutorial level )
+
+################
+#mmmmmm..t.....#
+#.g@.t..s....#.#
+#mmmmmm...t....#
+#######t.....t.#
+#..p....t.c....#
+#..............#
+################
+
+( Harder momentum level )
+
+################
+#......@....m..#
+#.g.%.t..!s..p.#
+#........##....#
+#m.!...##...%..#
+#.p..t.sc..t.m.#
+#..$.....@.....#
+################
   
 
 ( Relatively straightforward river level )
