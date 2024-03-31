@@ -804,6 +804,8 @@ down  [ Pushable StreamUR ]    -> [ > Pushable StreamUR ]
 right [ Pushable StreamRight ] -> [ > Pushable StreamRight ]
 right [ Pushable StreamLL ]    -> [ > Pushable StreamLL ]
 right [ Pushable LogA ]        -> [ > Pushable LogA ]
+down [ Pushable StreamUL ] -> [ > Pushable StreamUL ]
+left [ Pushable StreamLR ] -> [ > Pushable StreamLR ]
 
 ( Restore visual Seed )
 late [ SeedCollider ] -> [ SeedCollider Seed ]
@@ -858,6 +860,59 @@ no Unsatisfied
 =======
 LEVELS
 =======
+
+#####w#######
+#....1.######
+gstc/j..#####
+####w...#####
+####w...#####
+####l\..#####
+#####a..p####
+######..#####
+#############
+#############
+
+
+
+#####w#######
+#####w#######
+#####w#######
+#....1.######
+#.tscw.######
+#####w.######
+#####w..#####
+#####a..p####
+#############
+#############
+#############
+#############
+
+#############
+#...www.....#
+#...12w.....#
+#...w31...p.#
+#.t.wwlh\...#
+#...wlh\w...#
+#.g.lh\ww...#
+#.s...aww...#
+#..c..waw...#
+#.o...wwa...#
+#.....www...#
+#############
+
+#############
+#...www.....#
+#...12w.....#
+#...w31...p.#
+#.t.wwlh\...#
+#...wlh\w...#
+#.g.lh\ww...#
+#.s...aww...#
+#..c..waw...#
+#.o...wwa...#
+#.....www...#
+#############
+
 ##############
 #.....@&.....#
 #.st...!m..p.#
@@ -922,5 +977,3 @@ LEVELS
 #..........##
 #########..##
 #############
-
-
