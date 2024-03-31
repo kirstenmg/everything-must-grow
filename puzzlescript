@@ -12,20 +12,56 @@ darkgreen
 
 
 Wall
-darkgray gray
-00000
-00000
-00000
-00000
-00000
+darkgray #4a4a4a #5c5c5c
+( #6b3f37 #854c3c #944b37 )
+00111
+21122
+11001
+02200
+20002
 
 Player G
-lightbrown blue lightgray brown
+#b58870 blue gray #ebb538 #b34132
+( lightbrown blue gray brown brown )
 33333
 .000.
 01210
 .111.
-.3.3.
+.4.4.
+
+( tripping )
+LeftFallenPlayer
+#b58870 blue gray #ebb538 #b34132
+3.0..
+30113
+3021.
+30113
+3.0..
+
+RightFallenPlayer
+#b58870 blue gray #ebb538 #b34132
+..0.3
+31103
+.1203
+31103
+..0.3
+
+UpFallenPlayer
+#b58870 blue gray #ebb538 #b34132
+.....
+.....
+.111.
+03130
+.111.
+
+DownFallenPlayer
+#b58870 blue gray #ebb538 #b34132
+.....
+.....
+.111.
+04140
+.111.
+
 
 Seed
 lightbrown
@@ -587,38 +623,7 @@ brown blue lightblue
 00000
 
 
-( tripping )
-LeftFallenPlayer
-lightbrown blue lightgray brown
-3.0..
-30113
-3021.
-30113
-3.0..
 
-RightFallenPlayer
-lightbrown blue lightgray brown
-..0.3
-31103
-.1203
-31103
-..0.3
-
-UpFallenPlayer
-lightbrown blue lightgray brown
-.....
-.....
-.111.
-03130
-.111.
-
-DownFallenPlayer
-brown darkbrown lightbrown
-.....
-.....
-.000.
-20102
-.000.
 
 Root T
 darkbrown
@@ -705,8 +710,9 @@ WateringCan = WateringCan0 or WateringCan1 or WateringCan2 or WateringCan3
 Sprout = Sprout0 or Sprout1
 Flower = Flower0 or Flower1 or Flower2
 Sapling = Sapling0 or Sapling1 or Sapling2
+TreeUnsat = TreeTop0 or TreeBottom0 or TreeTop1 or TreeBottom1
 Tree = TreeTop0 or TreeBottom0 or TreeTop1 or TreeBottom1 or TreeTop2 or TreeBottom2
-Unsatisfied = Seed or Sprout or Flower0 or Flower1 or Acorn or Sapling
+Unsatisfied = Seed or Sprout or Flower0 or Flower1 or Acorn or Sapling or TreeUnsat
 Daisy = Daisy1 or Daisy2 or Daisy3 or Daisy4 or Daisy5
 
 Pushable = SeedCollider or Acorn or WateringCan or Mushroom or Daisy
@@ -861,6 +867,8 @@ no Unsatisfied
 LEVELS
 =======
 
+
+
 #############
 #...www.....#
 #...12w.....#
@@ -909,7 +917,6 @@ LEVELS
 #............#
 ##############
 
-(River tutorial level )
 
 
 ( More advanced river level )
@@ -925,9 +932,14 @@ gstc/j..#####
 #############
 #############
 
+
 (Tree tutorial level )
-
-
+##########
+#..#.....#
+#.c&.s..p#
+#.g..op..#
+#........#
+##########
 
 
 
