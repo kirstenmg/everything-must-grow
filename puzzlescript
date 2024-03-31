@@ -734,6 +734,12 @@ Bridge = BridgeHorizontal or BridgeVertical or BridgeLD or BridgeRU
 =======
 SOUNDS
 =======
+SFX0 72434303
+SFX1 28639502
+SFX2 62384705
+SFX3 52564503
+startlevel 71612509
+Player Move 85667904
 
 
 ================
@@ -763,29 +769,29 @@ right [ SeedCollider MoveRight | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Playe
 up    [ SeedCollider MoveUp    | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
 down  [ SeedCollider MoveDown  | Pot ] [ FallenPlayer ] -> [ | Sprout0 ] [ Player ]
 
-late [ SeedCollider Pot ] -> [ Sprout0 ]
-[ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ]
+late [ SeedCollider Pot ] -> [ Sprout0 ] SFX3
+[ action Player | WateringCan0 | Sprout ] -> [ Player | WateringCan1 | Flower0 ] SFX2
 
 left  [ Acorn MoveLeft  | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
 right [ Acorn MoveRight | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
 up    [ Acorn MoveUp    | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
 down  [ Acorn MoveDown  | Pot ] [ FallenPlayer ] -> [ | Sapling0 ] [ Player ]
 
-late [ Acorn Pot ] -> [ Sapling0 ]
+late [ Acorn Pot ] -> [ Sapling0 ] SFX3
 up [ TreeBottom0 | no Player no TreeTop0 no WateringCan ] -> [ TreeBottom0 | TreeTop0 ]
 up [ TreeBottom1 | TreeTop1 ] -> [ TreeBottom2 | TreeTop2 ]
 up [ TreeBottom0 | TreeTop0 ] -> [ TreeBottom1 | TreeTop1 ]
-[ action Player | WateringCan0 | Sapling2 ] -> [ Player | WateringCan1 | TreeBottom0 ]
+[ action Player | WateringCan0 | Sapling2 ] -> [ Player | WateringCan1 | TreeBottom0 ] SFX2
 
 ( Tripping )
 ( If a player moves onto a root, whatever they're pushing starts moving )
-left [ > Player | Root ] [ > Player | >  Pushable ] -> [ > LeftFallenPlayer | Root ] [ > LeftFallenPlayer | > Pushable > MoveLeft ]
+left [ > Player | Root ] [ > Player | >  Pushable ] -> [ > LeftFallenPlayer | Root ] [ > LeftFallenPlayer | > Pushable > MoveLeft ] SFX1
 
-right [ > Player | Root ] [ > Player | >  Pushable ] -> [ > RightFallenPlayer | Root ] [ > RightFallenPlayer | > Pushable > MoveRight ]
+right [ > Player | Root ] [ > Player | >  Pushable ] -> [ > RightFallenPlayer | Root ] [ > RightFallenPlayer | > Pushable > MoveRight ] SFX1
 
-up [ > Player | Root ] [ > Player | >  Pushable ] -> [ > UpFallenPlayer | Root ] [ > UpFallenPlayer | > Pushable > MoveUp ]
+up [ > Player | Root ] [ > Player | >  Pushable ] -> [ > UpFallenPlayer | Root ] [ > UpFallenPlayer | > Pushable > MoveUp ] SFX1
 
-down [ > Player | Root ] [ > Player | >  Pushable ] -> [ > DownFallenPlayer | Root] [ > DownFallenPlayer | > Pushable > MoveDown ]
+down [ > Player | Root ] [ > Player | >  Pushable ] -> [ > DownFallenPlayer | Root] [ > DownFallenPlayer | > Pushable > MoveDown ] SFX1
 
 ( An object that is moving keeps moving until it hits an obstacle )
 left  [ Pushable MoveLeft  | NO Obstacle ] -> [ > Pushable > MoveLeft  | NO Obstacle ] again
@@ -805,14 +811,17 @@ down  [ Pushable MoveDown  | Obstacle ] [ FallenPlayer ] -> [ Pushable | Obstacl
 ( Prevent the player from moving across the stream )
 [ > Player | Stream no Bridge ] -> [ Player | Stream ]
 
+[ > Pushable no Stream | Stream no Bridge ] -> [ > Pushable no Stream | Stream no Bridge ] SFX0
+
 ( Move pushables down the stream )
-down  [ Pushable StreamVert ]  -> [ > Pushable StreamVert ]
-down  [ Pushable StreamUR ]    -> [ > Pushable StreamUR ]
-right [ Pushable StreamRight ] -> [ > Pushable StreamRight ]
-right [ Pushable StreamLL ]    -> [ > Pushable StreamLL ]
-right [ Pushable LogA ]        -> [ > Pushable LogA ]
-down [ Pushable StreamUL ] -> [ > Pushable StreamUL ]
-left [ Pushable StreamLR ] -> [ > Pushable StreamLR ]
+down  [ Pushable StreamVert no Bridge]  -> [ > Pushable StreamVert ]
+down  [ Pushable StreamUR no Bridge]    -> [ > Pushable StreamUR ]
+right [ Pushable StreamRight no Bridge] -> [ > Pushable StreamRight ]
+right [ Pushable StreamLL no Bridge]    -> [ > Pushable StreamLL ]
+right [ Pushable LogA no Bridge]        -> [ > Pushable LogA ]
+down [ Pushable StreamUL no Bridge] -> [ > Pushable StreamUL ] 
+left [ Pushable StreamLR no Bridge] -> [ > Pushable StreamLR ] 
+
 
 ( Restore visual Seed )
 late [ SeedCollider ] -> [ SeedCollider Seed ]
@@ -844,6 +853,13 @@ late [ SeedCollider ] -> [ SeedCollider Seed ]
 [ StreamRight1 ] -> [ StreamRight2 ]
 [ StreamRight0 ] -> [ StreamRight1 ]
 
+[ StreamLeft5 ] -> [ StreamLeft0 ]
+[ StreamLeft4 ] -> [ StreamLeft5 ]
+[ StreamLeft3 ] -> [ StreamLeft4 ]
+[ StreamLeft2 ] -> [ StreamLeft3 ]
+[ StreamLeft1 ] -> [ StreamLeft2 ]
+[ StreamLeft0 ] -> [ StreamLeft1 ]
+
 [ StreamLL5 ] -> [ StreamLL0 ]
 [ StreamLL4 ] -> [ StreamLL5 ]
 [ StreamLL3 ] -> [ StreamLL4 ]
@@ -858,6 +874,20 @@ late [ SeedCollider ] -> [ SeedCollider Seed ]
 [ StreamUR1 ] -> [ StreamUR2 ]
 [ StreamUR0 ] -> [ StreamUR1 ]
 
+[ StreamUL5 ] -> [ StreamUL0 ]
+[ StreamUL4 ] -> [ StreamUL5 ]
+[ StreamUL3 ] -> [ StreamUL4 ]
+[ StreamUL2 ] -> [ StreamUL3 ]
+[ StreamUL1 ] -> [ StreamUL2 ]
+[ StreamUL0 ] -> [ StreamUL1 ]
+
+[ StreamLR5 ] -> [ StreamLR0 ]
+[ StreamLR4 ] -> [ StreamLR5 ]
+[ StreamLR3 ] -> [ StreamLR4 ]
+[ StreamLR2 ] -> [ StreamLR3 ]
+[ StreamLR1 ] -> [ StreamLR2 ]
+[ StreamLR0 ] -> [ StreamLR1 ]
+
 ==============
 WINCONDITIONS
 ==============
@@ -867,6 +897,8 @@ no Unsatisfied
 =======
 LEVELS
 =======
+
+
 
 MESSAGE * birds chirping *
 MESSAGE What a beautiful day! Perfect weather for some planting in my garden.
@@ -944,25 +976,9 @@ MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over 
 #.p..t.sc..t.m.#
 #..$.....@.....#
 ################
+
+MESSAGE Woah! A river!
   
-
-( Relatively straightforward river level )
-###################
-#....1.m..........#
-#...mlhhh\cm.m###.#
-##..mmmmmw..#.###.#
-##.#####!wm.#.###.#
-##.#####@w..#.###.#
-##......$w........#
-##.#s.##%w......#.#
-##.#..##&lhhhh\.#.#
-##.#.###!@$!@&w.#.#
-##.m.#.##.&@$!a.#.#
-####.mm....@%!w.#.#
-##..m.....m.g@wp..#
-###################
-
-
 ( More advanced river level )
 (Needs some work aesthetically )
 #######w####
@@ -975,6 +991,23 @@ MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over 
 #!@!.#mw..m#
 ############
 
+( Relatively straightforward river level )
+###################
+#....1.m..........#
+#....lhhh\cm.m###.#
+##...mmmmw..#.###.#
+##.#####!wm.#.###.#
+##.#####@w..#.###.#
+##......$w........#
+##.#s.##%w......#.#
+##.#..##&lhhhh\.#.#
+##.#.###!@$!@&w.#.#
+##.m.#.##.&@$!a.#.#
+####.mm....@%!w.#.#
+##..m.....m.g@wp..#
+###################
+
+MESSAGE What's this? An acorn?
 
 (Tree tutorial level )
 ##########
@@ -995,5 +1028,5 @@ MESSAGE The wind has dropped a lot of branches lately. I hope I don't trip over 
 ##m%m!m!..#
 ###########
 
-MESSAGE Everything is planted! What a fulfilling day!
 
+MESSAGE Everything is planted! What a fulfilling day!
